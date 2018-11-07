@@ -24,7 +24,7 @@ prev_val = button.value
 
 try:
     while True:
-        if button.value == True and not prev_val:
+        if button.value == True and button.value != prev_val:
             print("increment counter")
             counter += 1
         prev_val = button.value

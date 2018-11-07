@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 '''
 button triggers countdown timer, which controls how long an led can be on
@@ -44,7 +44,7 @@ if __name__ == '__main__':
         print("ready!")
 
         while True:
-            if button.value == True and not prev_val:
+            if button.value == True and button.value != prev_val:
                 led.on()
                 delay = datetime.timedelta(seconds=DUR)
                 print('Starting countdown for', delay)
@@ -55,4 +55,3 @@ if __name__ == '__main__':
         print("interrupted!")
         button.close()
         led.close()
-
