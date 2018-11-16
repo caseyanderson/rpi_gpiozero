@@ -4,20 +4,13 @@
 button triggers countdown timer, which controls how long an led can be on
 
 
-arg1 is BUTTON_PIN
-arg2 is LED_PIN
-arg3 is DUR (in seconds)
-
-TO RUN: python3 button_timer_led.py BUTTON_PIN LED_PIN DUR
-i.e. python3 button_timer_led.py 16 17 90
-
-
+TO RUN: python3 button_timer_led.py --btn 16 --led 17 --dur 30
 '''
 from gpiozero import Button
 from gpiozero import LED
 import datetime
 import time
-import sys
+import argparse
 
 
 def countdown_timer(x, now=datetime.datetime.now):
@@ -32,9 +25,18 @@ def countdown_timer(x, now=datetime.datetime.now):
 
 if __name__ == '__main__':
     try:
-        BUTTON_PIN = int(sys.argv[1])
-        LED_PIN =  int(sys.argv[2])
-        DUR = int(sys.argv[3])
+        parser = argparse.ArgumentParser()
+        parser.add_argument("--btn", type=int, default=16,
+            help="The button pin")
+        parser.add_argument("--led", type=int, default=17,
+            help="The LED pin")
+        parser.add_argument("--dur", type=int, default=10,
+            help="The timer duration (in seconds)")
+        args = parser.parse_args()
+
+        BUTTON_PIN = int(args.btn)
+        LED_PIN =  int(args.led)
+        DUR = int(args.dur)
 
         button = Button(BUTTON_PIN)
         led = LED(LED_PIN)
