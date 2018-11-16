@@ -51,6 +51,7 @@ if __name__ == '__main__':
                 countdown_timer(int(delay.total_seconds()))
                 led.off()
             prev_val = button.value
+            time.sleep(0.05)
     except KeyboardInterrupt:
         print("interrupted!")
         button.close()

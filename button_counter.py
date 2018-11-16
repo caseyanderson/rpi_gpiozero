@@ -12,6 +12,7 @@ button presses are identified when button.value is True and also diff state from
 
 from gpiozero import Button
 from gpiozero import LED
+from time import sleep
 
 button = Button(16)
 led = LED(17)
@@ -20,15 +21,19 @@ print("ready!")
 led.on()
 
 counter = 0
+limit = 5
 prev_val = button.value
 
 try:
     while True:
         if button.value == True and button.value != prev_val:
-            print("increment counter")
             counter += 1
+            print("counter is " + str(counter))
+            if counter == limit:
+                print("counter at limit, reset to 0")
+                counter = 0
         prev_val = button.value
-        print("counter is " + str(counter))
+        sleep(0.01)
 except KeyboardInterrupt:
     print("interrupted!")
     button.close()
